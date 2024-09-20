@@ -12,6 +12,11 @@ namespace ContosoPizza.Pages
         // will be initialized later, null saftety checks aren't required
         public IList<Pizza> PizzaList { get; set; } = default!;
 
+        // binds NewPizza to Razor page
+        // When HTTP POST request is made, NewPizza property is populated with user input
+        [BindProperty]
+        public Pizza NewPizza { get; set; } = default!;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -26,6 +31,24 @@ namespace ContosoPizza.Pages
         public void OnGet()
         {
             PizzaList = _service.GetPizzas();
+        }
+        /// <summary>
+        /// Creates a new pizza to be added to the list of pizzas
+        /// </summary>
+        /// <returns>Page navigation</returns>
+        public IActionResult OnPost()
+        {
+            // Verify if user input is valid
+            // validation rules inferred from attributes on Pizza class
+            // if user input is invalid, Page method is called to re-render page
+            if(!ModelState.IsValid || NewPizza == null)
+            {
+                return Page();
+            }
+            // Add new pizza to _service object
+            _service.AddPizza(NewPizza);
+            // Rerender page with updated list of pizzas
+            return RedirectToAction("Get");
         }
     }
 }
