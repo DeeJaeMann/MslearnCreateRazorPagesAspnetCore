@@ -20,7 +20,7 @@
     <!-- Table body -->
     <tbody>
         <!-- Iterate through the list of pizzas -->
-        @foreach(var pizza in Model.PizzaList)
+        @foreach(ContosoPizza.Models.Pizza pizza in Model.PizzaList)
         {
             <tr>
                 <td>@pizza.Name</td>
