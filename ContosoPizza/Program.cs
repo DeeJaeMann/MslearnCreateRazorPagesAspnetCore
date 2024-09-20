@@ -9,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<PizzaContext>(options =>
     options.UseSqlite("Data Source=ContosoPizza.db"));
+// Register PizzaService class
+// A new PizzaService object should be created for each HTTP request (AddScoped)
+builder.Services.AddScoped<PizzaService>();
 
 var app = builder.Build();
 
