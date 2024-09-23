@@ -6,6 +6,44 @@
 
 <h1>Pizza List 🍕</h1>
 <!-- New Pizza form will go here -->
+<form method="post">
+    <!-- used to display validation errors for entire model -->
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="NewPizza.Name" class="control-label"></label>
+        <input asp-for="NewPizza.Name" class="form-conrol" />
+        <!-- display validation errors for each form field -->
+        <span asp-validation-for="NewPizza.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NewPizza.Size" class="control-label"></label>
+        <select asp-for="NewPizza.Size" class="form-control" id="PizzaSize">
+            <option value="">-- Select Size --</option>
+            <option value="Small">Small</option>
+            <option value="Medium">Medium</option>
+            <option value="Large">Large</option>
+        </select>
+        <span asp-validation-for="NewPizza.Size" class="text-danger"></span>
+    </div>
+    <div class="form-group form-check">
+        <label class="form-check-label">
+            <!-- used to display the display name for the IsGlutenFree property -->
+            <!-- Ensures that the checkbox is selected when the user clicks the label -->
+            <input class="form-check-input" asp-for="NewPizza.IsGlutenFree" /> @Html.DisplayNameFor(model => model.NewPizza.IsGlutenFree)
+        </label>
+    </div>
+    <div class="form-group">
+        <label asp-for="NewPizza.Price" class="control-label"></label>
+        <input asp-for="NewPizza.Price" class="form-control" />
+        <span asp-validation-for="NewPizza.Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+<!-- List of pizzas will go here -->
+
 <table class="table mt-5">
     <!-- Table header -->
     <thead>
@@ -37,4 +75,9 @@
         }
     </tbody>
 </table>
-<!-- List of pizzas will go here -->
+
+
+<!-- Inject client side validation scripts into page -->
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

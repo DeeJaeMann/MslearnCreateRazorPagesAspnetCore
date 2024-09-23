@@ -50,5 +50,18 @@ namespace ContosoPizza.Pages
             // Rerender page with updated list of pizzas
             return RedirectToAction("Get");
         }
+
+        /// <summary>
+        /// Deletes pizza from list of pizzas
+        /// </summary>
+        /// <param name="id">Page navigation</param>
+        /// <returns></returns>
+        public IActionResult OnPostDelete(int id)
+        {
+            // call delete method
+            _service.DeletePizza(id);
+            // render page with updated list of pizzas
+            return RedirectToAction("Get");
+        }
     }
 }
